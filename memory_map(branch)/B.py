@@ -4,15 +4,17 @@ import sys
 import mmap
 import subprocess
 
+
 # call to  the A process
-p = subprocess.Popen(['python.exe', './A.py', '16'])
+p = subprocess.Popen(['python.exe', './A.py', sys.argv[1]])
 
 # things to do while the A process finish
+seed = int(sys.argv[1])
 empty_str = ""
 xor_list = []
 key_pos = 0
 binary_pos = 0
-seed = int(sys.argv[1])
+
 random.seed(seed)
 
 # wait for the A process to finish
