@@ -1,7 +1,6 @@
 import binascii
 import random
 import A
-
 seed=16
 bin_str = A.getInput(seed);
 list_bin_str = list(bin_str)

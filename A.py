@@ -1,8 +1,9 @@
 import random
+import binascii
 phrase = input("Adquiriendo datos de la entrada estándar\n")
 seed = 16
 def getInput(seed):
-    bin_str = '0'+'0'.join(format(ord(i), 'b') for i in phrase)
+    bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
     list_bin_str = list(bin_str)
     random.seed(seed)
     random_key = random.getrandbits(len(bin_str))
