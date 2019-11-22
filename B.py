@@ -1,8 +1,10 @@
 import binascii
 import random
-import A
-seed=16
-bin_str = A.getInput(seed);
+import sys
+import time
+
+seed = int(sys.argv[1])
+bin_str = input()
 list_bin_str = list(bin_str)
 print("Texto Encriptado: \n" + bin_str)
 random.seed(seed)

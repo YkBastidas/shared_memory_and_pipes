@@ -6,7 +6,7 @@ import subprocess
 
 
 # call to  the A process
-p = subprocess.Popen(['python','A.py', sys.argv[1]])
+p = subprocess.Popen(['python3','A.py', sys.argv[1]])
 
 # things to do while the A process finish
 seed = int(sys.argv[1])
