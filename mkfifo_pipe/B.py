@@ -1,30 +1,18 @@
 import binascii
 import random
 import sys
-import mmap
-import subprocess
 
-
-# call to  the A process
-p = subprocess.Popen(['python.exe', './A.py', sys.argv[1]])
-
-# things to do while the A process finish
 seed = int(sys.argv[1])
 empty_str = ""
 xor_list = []
 key_pos = 0
 binary_pos = 0
-
 random.seed(seed)
 
-# wait for the A process to finish
-p.wait()
-
-#continue when the A process finishes
-with open("map.txt", "r+") as f:
-    mm = mmap.mmap(f.fileno(), 0)
-    bin_str = mm.readline().decode()
-    mm.close()
+#reading from the named pipe
+fifo = open("./mkpipe", "r")
+bin_str = fifo.read()
+fifo.close()
 list_bin_str = list(bin_str)
 print("Texto Encriptado: \n" + bin_str)
 

@@ -2,7 +2,7 @@ import random
 import binascii
 import sys
 
-phrase = input("Adquiriendo datos de la entrada estándar\n")
+phrase = input('Adquiriendo datos de la entrada estándar\n')
 seed = int(sys.argv[1])
 bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
 list_bin_str = list(bin_str)
@@ -28,5 +28,6 @@ for binary_content in list_bin_str:
     binary_pos +=1
     key_pos +=1
 xor_str = empty_str.join(xor_list)
-with open("map.txt", "w+") as f:
-    f.write(xor_str)
+fifo = open('./mkpipe', 'w')
+fifo.write(xor_str)
+fifo.close()
