@@ -1,11 +1,14 @@
 import binascii
 import random
 import sys
-import mmap
-import contextlib
-import fcntl
 import os
-import time
+from subprocess import Popen, PIPE
+
+class Result:
+    pass
+
+result = Result()
+process_A = Popen(['python3', 'A.py', sys.argv[1]], stdout = PIPE)
 
 # things to do while the A process finish
 seed = int(sys.argv[1])
@@ -14,31 +17,25 @@ xor_list = []
 key_pos = 0
 binary_pos = 0
 random.seed(seed)
-loading_text = [".", "..", "...", "   "]
-while(1):
-    if os.path.exists("memory_map"):
-        file_handler= open("memory_map", "r")
-        fcntl.flock (file_handler, fcntl.LOCK_EX)
-        if(file_handler.readline()==""):
-            print("El archivo está vacío y ha sido eliminado")
-            bin_str = file_handler.readline()
-            fcntl.flock (file_handler, fcntl.LOCK_UN)
-            file_handler.close()
-            os.remove("memory_map")
-        else:
-            with contextlib.closing(mmap.mmap(file_handler.fileno(), 0, access=mmap.ACCESS_READ, flags=mmap.MAP_SHARED)) as m:
-                bin_str = m.readline().decode()
-            fcntl.flock (file_handler, fcntl.LOCK_UN)
-            file_handler.close()
-            list_bin_str = list(bin_str)
-        break
-    else:
-        i = 0
-        while i < 4:
-            time.sleep(0.5)
-            print ("Esperando Datos"+ loading_text[i], sep=' ', end='\r', flush=True)
-            i+=1
-        
+
+process_A.wait()
+stdout = process_A.communicate()
+print(str(stdout[0]))
+bin_str = str(stdout[0])
+
+separator_index= bin_str.find(',')
+end_index= bin_str.find('.')
+
+len_original_bin = int(bin_str[separator_index+1:end_index])
+bin_str = bin_str[2:separator_index]
+list_bin_str = list(bin_str)
+print(bin_str)
+input ()
+len_bin_str = len(bin_str)
+while(len_bin_str<len_original_bin):
+    list_bin_str.insert(0,'0')
+    len_bin_str+=1
+bin_str =  empty_str.join(list_bin_str)       
 if bin_str != "":
     print("Texto Encriptado: \n" + bin_str)
 
@@ -66,3 +63,5 @@ if bin_str != "":
     print("Texto Original : " + str(original_string)) 
     if os.path.exists("memory_map"):
         os.remove("memory_map")
+else:
+    print("ERROR: NO SE DETECTÓ LA ENTRADA DE DATOS")
