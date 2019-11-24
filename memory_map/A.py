@@ -4,6 +4,7 @@ import sys
 import mmap
 import contextlib
 import fcntl
+
 file_handler= open("memory_map", "w+")
 fcntl.flock (file_handler, fcntl.LOCK_EX)
 phrase = input("Adquiriendo datos de la entrada estándar\n")

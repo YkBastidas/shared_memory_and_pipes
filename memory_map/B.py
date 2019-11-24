@@ -2,7 +2,6 @@ import binascii
 import random
 import sys
 import mmap
-import subprocess
 import contextlib
 import fcntl
 import os

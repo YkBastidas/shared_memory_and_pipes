@@ -1,31 +1,13 @@
 import binascii
 import random
 import sys
-import pipes
-import subprocess
+import time
 
-
-# call to  the A process
-p = subprocess.Popen(['python3','A.py', sys.argv[1]])
-
-# things to do while the A process finish
 seed = int(sys.argv[1])
-empty_str = ""
-xor_list = []
-key_pos = 0
-binary_pos = 0
-
-random.seed(seed)
-
-# wait for the A process to finish
-p.wait()
-
-#continue when the A process finishes
-bin_str = open('pipe').read()
-input (bin_str)
+bin_str = input()
 list_bin_str = list(bin_str)
 print("Texto Encriptado: \n" + bin_str)
-
+random.seed(seed)
 random_key = random.getrandbits(len(bin_str))
 key= '{0:0b}'.format(random_key)
 list_key = list(key)
@@ -34,10 +16,12 @@ lenght_bin = len(bin_str)
 while lenght_key < lenght_bin :
        list_key.insert(0,'0')
        lenght_key+=1
-
+empty_str = ""
 key = empty_str.join(list_key)
 
-
+xor_list = []
+key_pos = 0
+binary_pos = 0
 for binary_content in list_bin_str:
     if list_bin_str[binary_pos] != list_key[key_pos]:
         xor_list.append("1")

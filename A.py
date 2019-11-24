@@ -1,7 +1,6 @@
 import random
 import binascii
 import sys
-
 sys.stderr.write("Adquiriendo datos de la entrada estándar\n")
 phrase = input()
 seed = int(sys.argv[1])
