@@ -3,10 +3,10 @@ A.py and B.py are non-related processes than can share information thanks to the
 
 Example (can be like this or vice-versa):  
 Bash 1:  
-´
+`
 $ python3 B.py 16
-´
+`
 Bash 2:  
-´
+`
 $ python3 A.py 16
-´
+`
