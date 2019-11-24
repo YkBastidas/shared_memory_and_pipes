@@ -1,8 +1,9 @@
 import random
 import binascii
 import sys
+sys.stderr.write("Adquiriendo datos de la entrada estándar\n")
+phrase = input()
 
-phrase = input("Adquiriendo datos de la entrada estándar\n")
 seed = int(sys.argv[1])
 bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
 list_bin_str = list(bin_str)
@@ -13,8 +14,8 @@ list_key = list(key)
 lenght_key = len(key)
 lenght_binary = len(bin_str)
 while lenght_key < lenght_binary :
-        list_key.insert(0,'0')
-        lenght_key+=1
+    list_key.insert(0,'0')
+    lenght_key+=1
 empty_str = ""
 key = empty_str.join(list_key)
 xor_list = []
