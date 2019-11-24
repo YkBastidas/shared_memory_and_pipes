@@ -1,6 +1,7 @@
-# shared_memory using memory map
-Only needs to call the B program with an integer as parameter to be used as the seed
+# shared_memory using mmap
+Open A.py and B.py in different terminals, both programs needs the same seed
 Example:
-�
-# python B.py 16
-�
+Bash 1
+Â´$ python3 B.py 16Â´
+Bash 2
+Â´$ python3 A.py 16Â´

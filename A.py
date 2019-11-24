@@ -1,9 +1,9 @@
 import random
 import binascii
 import sys
+
 sys.stderr.write("Adquiriendo datos de la entrada estándar\n")
 phrase = input()
-
 seed = int(sys.argv[1])
 bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
 list_bin_str = list(bin_str)
