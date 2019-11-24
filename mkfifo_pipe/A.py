@@ -2,10 +2,8 @@ import random
 import binascii
 import sys
 
-seed = int(sys.argv[1]) 
-old_stdout = sys.stdout
-sys.stdout = sys.stderr
-phrase = input("Adquiriendo datos de la entrada estándar\n")
+phrase = input('Adquiriendo datos de la entrada estándar\n')
+seed = int(sys.argv[1])
 bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
 list_bin_str = list(bin_str)
 random.seed(seed)
@@ -15,8 +13,8 @@ list_key = list(key)
 lenght_key = len(key)
 lenght_binary = len(bin_str)
 while lenght_key < lenght_binary :
-    list_key.insert(0,'0')
-    lenght_key+=1
+        list_key.insert(0,'0')
+        lenght_key+=1
 empty_str = ""
 key = empty_str.join(list_key)
 xor_list = []
@@ -30,5 +28,6 @@ for binary_content in list_bin_str:
     binary_pos +=1
     key_pos +=1
 xor_str = empty_str.join(xor_list)
-sys.stdout = old_stdout
-print(xor_str+','+str(len(xor_str))+'.')
+fifo = open('./mkpipe', 'w')
+fifo.write(xor_str)
+fifo.close()
