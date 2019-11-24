@@ -1,7 +1,15 @@
 import random
 import binascii
 import sys
+import mmap
+import contextlib
+import fcntl
 
+<<<<<<< Updated upstream:memory_map(branch)/A.py
+=======
+file_handler= open("memory_map", "w+")
+fcntl.flock (file_handler, fcntl.LOCK_EX)
+>>>>>>> Stashed changes:memory_map/A.py
 phrase = input("Adquiriendo datos de la entrada estándar\n")
 seed = int(sys.argv[1])
 bin_str =  '0'+bin(int.from_bytes(phrase.encode(), 'big'))[2:].zfill(8)
@@ -28,5 +36,6 @@ for binary_content in list_bin_str:
     binary_pos +=1
     key_pos +=1
 xor_str = empty_str.join(xor_list)
-with open("map.txt", "w+") as f:
-    f.write(xor_str)
+file_handler.write(xor_str)
+fcntl.flock (file_handler, fcntl.LOCK_UN)
+file_handler.close()
