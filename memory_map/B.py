@@ -2,18 +2,11 @@ import binascii
 import random
 import sys
 import mmap
-<<<<<<< Updated upstream:memory_map(branch)/B.py
 import subprocess
-
-
-# call to  the A process
-p = subprocess.Popen(['python.exe', './A.py', sys.argv[1]])
-=======
 import contextlib
 import fcntl
 import os
 import time
->>>>>>> Stashed changes:memory_map/B.py
 
 # things to do while the A process finish
 seed = int(sys.argv[1])
